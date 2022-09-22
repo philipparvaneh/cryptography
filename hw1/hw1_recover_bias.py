@@ -1,3 +1,4 @@
+from unittest import result
 import requests
 
 import config as cfg
@@ -35,12 +36,39 @@ def recover_flag() -> bytes:
     #outputs in an array, and then analyzing it. Second, once you know the position of the biased bit,
     #you can vary the message length to position bytes of the FLAG one-by-one over the biased position
     #to recover it.
-    arr = bytearray(20)
+    byteArr = bytearray(20)
     results = []
-    for x in range[30]:
-        results.append(bias_encryption_oracle(bytes(arr)))    
+    counter = dict(100)
+    for i in range(100):
+        results.append(bias_encryption_oracle(bytes(byteArr)))
+    for j in range(100):
+        counter[j] = [result[j].hex()[i:i+2] for i in range(0,len(results[j].hex()), 2)]
+    num = [0]*20
+    hexNum = -1
+    hexList = [0]*100
+    for i in range(100):
+        for k in range(100):
+            for j in range(20):
+                if counter[i][j] == counter[k][j]:
+                    num[j] += 1
+    maxCounter = -1
+    idx = -1
+    for i in range(20):
+        if num[i] > maxCounter:
+            maxCounter = num[i]
+            idx = i
+    for i in range(100):
+        hexList[i] = counter[i][idx]
+    hexDict = dict()
+    for i in range(100):
+        if counter[i][idx] in hexDict:
+            hexDict[counter[i][idx]] += 1
+        else:
+            hexDict[counter[i][idx]] = 1
+    hexNum = max(hexDict, key=hexDict.get)        
+    print(hexNum)
 
-    print(results)
+
     return flag
 
 
