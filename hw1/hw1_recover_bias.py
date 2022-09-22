@@ -67,7 +67,26 @@ def recover_flag() -> bytes:
             hexDict[counter[i][idx]] = 1
     hexNum = max(hexDict, key=hexDict.get)        
     print(hexNum)
-
+    next = False
+    byteFlag = bytearray(10)
+    for i in range(10):
+        byteArr = bytearray(19 - i)
+        newResult = ""
+        newCount = []
+        for j in range(100):
+            newResult = bias_encryption_oracle(bytes(byteArr))
+            newList = [newResult[j].hex()[i:i+2] for i in range(0,len(newResult[j].hex()), 2)]
+            newCount.append(newList)
+        num = dict()
+        for l in range(100):
+            for k in range(100):
+                if newCount[l][idx] == newCount[k][idx]:
+                    if newCount[l][idx] in num:
+                        num[newCount[l][idx]] += 1
+                    else:
+                        num[newCount[l][idx]] = 1
+    byteNum = max(num, key=num.get)
+    print(byteNum)
 
     return flag
 
