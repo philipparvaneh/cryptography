@@ -85,10 +85,14 @@ def recover_flag() -> bytes:
                     else:
                         num[newTracker[l][idx]] = 1
         byteNum = max(num, key=num.get)
+        print(byteNum)
         hexStr = hex(int(byteNum, 16) ^ int(hexNum, 16))
+        print(hexStr)
         byteFlag[i] = int(hexStr, 16)
+        print(byteFlag)
 
     flag = bytes(byteFlag)
+    print(flag)
     return flag
 
 
