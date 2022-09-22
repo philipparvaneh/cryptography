@@ -42,7 +42,7 @@ def recover_flag() -> bytes:
     for i in range(100):
         results.append(bias_encryption_oracle(bytes(byteArr)))
     for j in range(100):
-        counter[j] = [result[j].hex()[i:i+2] for i in range(0,len(results[j].hex()), 2)]
+        counter[j] = [results[j].hex()[i:i+2] for i in range(0,len(results[j].hex()), 2)]
     num = [0]*20
     hexNum = -1
     hexList = [0]*100
