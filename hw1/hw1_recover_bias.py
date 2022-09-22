@@ -38,18 +38,18 @@ def recover_flag() -> bytes:
     #to recover it.
     byteArr = bytearray(20)
     results = []
-    counter = [0]*100
+    tracker = [0]*100
     for i in range(100):
         results.append(bias_encryption_oracle(bytes(byteArr)))
     for j in range(100):
-        counter[j] = [results[j].hex()[i:i+2] for i in range(0,len(results[j].hex()), 2)]
+        tracker[j] = [results[j].hex()[i:i+2] for i in range(0,len(results[j].hex()), 2)]
     num = [0]*20
-    hexNum = -1
+    hexNum = 0
     hexList = [0]*100
     for i in range(100):
         for k in range(100):
             for j in range(20):
-                if counter[i][j] == counter[k][j]:
+                if tracker[i][j] == tracker[k][j]:
                     num[j] += 1
     maxCounter = 0
     idx = 0
@@ -58,41 +58,37 @@ def recover_flag() -> bytes:
             maxCounter = num[i]
             idx = i
     for i in range(100):
-        hexList[i] = counter[i][idx]
+        hexList[i] = tracker[i][idx]
     hexDict = dict()
     for i in range(100):
-        if counter[i][idx] in hexDict:
-            hexDict[counter[i][idx]] += 1
+        if tracker[i][idx] in hexDict:
+            hexDict[tracker[i][idx]] += 1
         else:
-            hexDict[counter[i][idx]] = 1
+            hexDict[tracker[i][idx]] = 1
     hexNum = max(hexDict, key=hexDict.get)        
-    print(hexNum)
-    next = False
+
     byteFlag = bytearray(10)
     for i in range(10):
         byteArr = bytearray(19 - i)
         newResult = ""
-        newCount = []
+        newTracker = []
         for j in range(100):
             newResult = bias_encryption_oracle(bytes(byteArr))
             newList = [newResult.hex()[k:k+2] for k in range(0,len(newResult.hex()), 2)]
-            newCount.append(newList)
+            newTracker.append(newList)
         num = dict()
         for l in range(100):
             for k in range(100):
-                if newCount[l][idx] == newCount[k][idx]:
-                    if newCount[l][idx] in num:
-                        num[newCount[l][idx]] += 1
+                if newTracker[l][idx] == newTracker[k][idx]:
+                    if newTracker[l][idx] in num:
+                        num[newTracker[l][idx]] += 1
                     else:
-                        num[newCount[l][idx]] = 1
+                        num[newTracker[l][idx]] = 1
         byteNum = max(num, key=num.get)
-        print(byteNum)
         hexStr = hex(int(byteNum, 16) ^ int(hexNum, 16))
         byteFlag[i] = int(hexStr, 16)
-        print(byteFlag)
-        
-    flag = bytes(byteFlag)
 
+    flag = bytes(byteFlag)
     return flag
 
 
