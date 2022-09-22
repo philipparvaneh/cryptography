@@ -36,9 +36,11 @@ def recover_flag() -> bytes:
     #you can vary the message length to position bytes of the FLAG one-by-one over the biased position
     #to recover it.
     arr = bytearray(20)
-    bias_encryption_oracle(arr)
+    results = []
+    for x in range[30]:
+        results.append(bias_encryption_oracle(bytes(arr)))    
 
-    print(arr)
+    print(results)
     return flag
 
 
