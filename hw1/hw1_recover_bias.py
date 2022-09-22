@@ -87,7 +87,9 @@ def recover_flag() -> bytes:
                         num[newCount[l][idx]] = 1
     byteNum = max(num, key=num.get)
     print(byteNum)
-
+    hexStr = hex(int(byteNum, 16) ^ int(hexNum, 16))
+    byteFlag[i] = int(hexStr, 16)
+    print(byteFlag)
     return flag
 
 
