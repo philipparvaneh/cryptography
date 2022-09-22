@@ -51,8 +51,8 @@ def recover_flag() -> bytes:
             for j in range(20):
                 if counter[i][j] == counter[k][j]:
                     num[j] += 1
-    maxCounter = -1
-    idx = -1
+    maxCounter = 0
+    idx = 0
     for i in range(20):
         if num[i] > maxCounter:
             maxCounter = num[i]
