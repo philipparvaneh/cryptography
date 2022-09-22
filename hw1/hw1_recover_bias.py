@@ -38,7 +38,7 @@ def recover_flag() -> bytes:
     #to recover it.
     byteArr = bytearray(20)
     results = []
-    counter = dict(100)
+    counter = [0]*100
     for i in range(100):
         results.append(bias_encryption_oracle(bytes(byteArr)))
     for j in range(100):
