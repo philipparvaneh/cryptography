@@ -90,7 +90,9 @@ def recover_flag() -> bytes:
     hexStr = hex(int(byteNum, 16) ^ int(hexNum, 16))
     byteFlag[i] = int(hexStr, 16)
     print(byteFlag)
+    flag = bytes(byteFlag)
     return flag
+
 
 
 if __name__ == "__main__":
