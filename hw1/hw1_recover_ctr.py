@@ -31,6 +31,13 @@ def recover_flag() -> bytes:
     flag = bytes()
 
     # TODO: fill in your answer here
+    flag_size = len(ctr_encryption_oracle(bytes()))
+    ct1 = ctr_encryption_oracle(bytes())
+    ct2 = ctr_encryption_oracle((bytes(bytes([0] * flag_size))))
+
+    x = min(len(ct1), len(ct2))
+
+    flag = xor(ct1[:x], ct2[:x])
 
     return flag
 
