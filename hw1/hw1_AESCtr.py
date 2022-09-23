@@ -3,6 +3,7 @@
 #
 
 import math, struct
+from re import L
 from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES
 
@@ -49,6 +50,16 @@ class AESCtr:
         ct = b""
 
         # TODO: Fill in this function
+        l = len(pt)
+        n = self._block_size_bytes 
+        m = math.ceil(l/n)
+        p = b""
+        
+        nonce = get_random_bytes(int(n))
+        g = self._nonced_counter(nonce,m)
+        for i in range(n):
+            p += self._aes_cipher(next(g))
+        ct = xor(p, pt)       
 
         return nonce, ct
 
