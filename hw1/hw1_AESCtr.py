@@ -55,7 +55,7 @@ class AESCtr:
         m = math.ceil(l/n)
         
         nonce = get_random_bytes(int(n))
-        g = self._nonced_counter(nonce,m)
+        g = self._nonced_counter(nonce,n)
         p = bytes()
         for i in range(n):
             p += self._aes_cipher(next(g))
