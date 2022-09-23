@@ -68,13 +68,13 @@ def recover_flag() -> bytes:
     hexNum = max(hexDict, key=hexDict.get)        
 
     byteFlag = bytearray(10)
-    for i in range(10):
+    for i in range(20):
         byteArr = bytearray(19 - i)
         newResult = ""
         newTracker = []
         for j in range(100):
             newResult = bias_encryption_oracle(bytes(byteArr))
-            newList = [newResult.hex()[k:k+2] for k in range(0,len(newResult.hex()), 2)]
+            newList = [newResult.hex()[k : k + 2] for k in range(0, len(newResult.hex()), 2)]
             newTracker.append(newList)
         num = dict()
         for l in range(100):

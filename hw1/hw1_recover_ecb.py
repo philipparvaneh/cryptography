@@ -39,6 +39,7 @@ def recover_flag() -> bytes:
     flag = bytes()
 
     # TODO: fill in your answer here
+    
 
     return flag
 

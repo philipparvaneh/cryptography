@@ -77,5 +77,4 @@ class AESCtr:
             p += self._aes_cipher(next(g))
         pt = xor(p, ct)      
 
-
         return pt
