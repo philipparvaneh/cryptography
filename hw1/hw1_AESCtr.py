@@ -57,7 +57,7 @@ class AESCtr:
         
         nonce = get_random_bytes(int(n/2))
         g = self._nonced_counter(nonce,m)
-        for i in range(n):
+        for i in range(m):
             p += self._aes_cipher(next(g))
         ct = xor(p, pt)       
 
