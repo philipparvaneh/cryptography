@@ -67,8 +67,9 @@ def recover_flag() -> bytes:
             hexDict[tracker[i][idx]] = 1
     hexNum = max(hexDict, key=hexDict.get)        
 
+    print(hexNum)
     byteFlag = bytearray(10)
-    for i in range(20):
+    for i in range(19):
         byteArr = bytearray(19 - i)
         newResult = ""
         newTracker = []
@@ -85,11 +86,11 @@ def recover_flag() -> bytes:
                     else:
                         num[newTracker[l][idx]] = 1
         byteNum = max(num, key=num.get)
-        print(byteNum)
+        #print(byteNum)
         hexStr = hex(int(byteNum, 16) ^ int(hexNum, 16))
-        print(hexStr)
+        #print(hexStr)
         byteFlag[i] = int(hexStr, 16)
-        print(byteFlag)
+        #print(byteFlag)
 
     flag = bytes(byteFlag)
     print(flag)
