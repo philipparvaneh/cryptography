@@ -70,8 +70,8 @@ def recover_flag() -> bytes:
     print(hexNum)
     print(idx)
     byteFlag = bytearray(10)
-    for i in range(19):
-        byteArr = bytearray(19 - i)
+    for i in range(10):
+        byteArr = bytearray(13 - i)
         newResult = ""
         newTracker = []
         for j in range(100):
