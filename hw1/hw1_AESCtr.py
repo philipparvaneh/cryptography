@@ -3,8 +3,6 @@
 #
 
 import math, struct
-from signal import CTRL_BREAK_EVENT
-from re import L
 from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES
 
