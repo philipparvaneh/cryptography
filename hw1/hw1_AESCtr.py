@@ -3,6 +3,7 @@
 #
 
 import math, struct
+from signal import CTRL_BREAK_EVENT
 from re import L
 from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES
@@ -69,5 +70,14 @@ class AESCtr:
         pt = b""
 
         # TODO: Fill in this function
+        l = len(ct)
+        n = self._block_size_bytes
+        m = math.ceil(1/n)
+        p = b""
+        g = self._nonced_counter(nonce, m)
+        for i in range(m):
+            p += self._aes_cipher(next(g))
+        pt = xor(p, ct)      
+
 
         return pt
