@@ -68,6 +68,7 @@ def recover_flag() -> bytes:
     hexNum = max(hexDict, key=hexDict.get)        
 
     print(hexNum)
+    print(idx)
     byteFlag = bytearray(10)
     for i in range(19):
         byteArr = bytearray(19 - i)
